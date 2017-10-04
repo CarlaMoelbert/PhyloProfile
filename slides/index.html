@@ -1,0 +1,437 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/simple.css" id=theme>
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+
+				<!-- SLIDE 1 title -->
+				<section>
+					<h1>PhyloProfile</h1>
+				</section>
+
+				<!-- SLIDE 2 introduction -->
+				<section>
+					<h5 style="color: white; background-color: #6baed6"><strong>Introduction</strong></h5>
+					<section>
+						<p>Phylogenetic profiles</p>
+						<img src="images/0-1_matrix_1.png" style='float: top; border:0' height=200/>
+						<p>
+							<ul>
+								<li style="font-size:20px">presence/absence pattern of genes (the seed) across a set of taxa</li>
+							</ul>
+						</p>
+					</section>
+					<section>
+						<p>Phylogenetic profiles</p>
+						<img src="images/0-1_matrix_2.png" style='float: top; border:0' height=250/>
+						<p>
+							<ul>
+								<li style="font-size:20px">presence of ortholog <=> presence of seed's function</li>
+							</ul>
+						</p>
+						<p>
+							<ul>
+								<p style="font-size:20px">=> transfer functions between orthologs</p>
+							</ul>
+						</p>
+					</section>
+					<section>
+						<p>Phylogenetic profiles</p>
+						<img src="images/0-1_matrix_3.png" style='float: top; border:0' height=250/>
+						<p>
+							<ul>
+								<li style="font-size:20px">similar profile <=> functionally interaction</li>
+							</ul>
+						</p>
+						<p>
+							<ul>
+								<p style="font-size:20px">=> trace functional protein clusters or metabolic networks across species</p>
+							</ul>
+						</p>
+					</section>
+					<section>
+						<p>Phylogenetic profiles</p>
+						<img src="images/0-1_matrix_3.png" style='float: top; border:0' height=250/>
+						<p>
+							<p style="font-size:20px">PROBLEM:</p>
+							<ul>
+								<li style="font-size:20px">specificity of orthology inference</li>
+								<li style="font-size:20px">orthology does not guarantee functional equivalence</li>
+							</ul>
+						</p>
+						<p style="font-size:20px">=> increase the informativeness of orthology assignemnt by using <em><span style="color: #FF0000">complementary information</span></em>
+						</p>
+					</section>
+
+				</section>
+
+				<!-- SLIDE 2 introduction -->
+				<section>
+					<h5 style="color: white; background-color: #6baed6"><strong>Introduction</strong></h5>
+					<section>
+						<div id='intro'>
+							<p>PhyloProfile tool</p>
+							<img src="images/main_plot.png" style='float: top; border:0' height=300/>
+							<p>
+								<ul>
+									<li style="font-size:20px">Shiny(R)-based</li>
+									<li style="font-size:20px">integrate, <span style="color: #FF0000">dynamically</span> visualize and explore <span style="color: #FF0000">multi-layered</span> phylogenetic profiles</li>
+									<li style="font-size:20px">available <a target="_blank" href="https://phyloprofile.shinyapps.io/phyloprofile/">online</a> & <a target="_blank" href="https://github.com/BIONF/phyloprofile">standalone</a></li>
+								</ul>
+							</p>
+						</div>
+					</section>
+
+					<section>
+						<p>
+							<li style="font-size:20px"><span style="color: #FF0000">dynamically</span> filter & analyze profiles with different thresholds</li>
+							<img src="images/cutoff_var.png" style='float: top; border:0' height=50/>
+							<li style="font-size:20px"><span style="color: #FF0000">dynamically</span> change the resolution of the profile analysis</li>
+							<div style="width:500px; margin:0 auto;">
+								<div style="float:left; width:100 px"><img src="images/seed_taxon_2.png" style='float: top; border:0' height=150/></div>
+								<div style="float:top; width:100 px"><img src="images/subset_gene_taxa.png" style='float: top; border:0' height=150/></div>
+							</div>
+							<li style="font-size:20px"><span style="color: #FF0000">dynamically</span> change profile appearance</li>
+							<div style="width:500px; margin:0 auto;">
+								<div style="float:left; width:100 px"><img src="images/plot_appearance_01.png" style='float: top; border:0' height=100/></div>
+								<div style="float:top; width:100 px"><img src="images/plot_appearance_02.png" style='float: top; border:0' height=200/></div>
+							</div>
+						</p>
+					</section>
+
+					<section>
+						<p style="font-size:30px"><span style="color: #FF0000">Multi-layers</span></p>
+						<p style="font-size:30px">=</p>
+						<p style="font-size:30px">presence/absence pattern + two additional layers of information</p>
+						<br>
+						<p>
+							<ul>
+								<li style="font-size:20px">sequence similarity</li>
+								<li style="font-size:20px">domain architecture similarity</li>
+								<li style="font-size:20px">semantic similarities of Gene Ontology-terms</li>
+								<li style="font-size:20px">taxonomic distances</li>
+								<li style="font-size:20px">etc.</li>
+							</ul>
+						</p>
+					</section>
+				</section>
+
+				<!-- SLIDE 3 input -->
+				<section>
+					<h5 style="color: white; background-color: #6baed6"><strong>Input</strong></h5>
+					<section>
+						<div id='input'>
+							<img src="images/input.png" style='float: top; border:0' height=300/>
+							<p>
+								<ul>
+									<li style="font-size:30px"><a href="#/3/1">Main</a> & <a href="#/3/4">additional annotation</a> input</li>
+									<li style="font-size:30px"><a href="#/3/5">Variables</a></li>
+									<li style="font-size:30px"><a href="#/3/6">Configurations</a></li>
+									<li style="font-size:30px"><a href="#/3/7">Seed taxon selection</a></li>
+								</ul>
+							</p>
+						</div>
+					</section>
+					<section>
+						<div id='main_input'>
+							<p>Main input</p>
+							<p style="font-size:20px">presence/absence pattern + up to 2 additional variables</p>
+							<img src="images/input_xml.png" style='float: top; border:0' height=300/>
+							<p style="font-size:30px"><a target="_blank" href="https://raw.githubusercontent.com/BIONF/phyloprofile/master/data/demo/test.main.xml">orthoXML</a> format</p>
+							<p style="font-size:20px"><a target="_blank" href="http://www.orthoxml.org/xml/Main.html">supported</a> by OMA, OrthoMCL, InParanoid, Hieranoid, Panther, Roundup, etc.</p>
+							<p style="font-size:20px"><em>*<a target="_blank" href="https://github.com/BIONF/PhyloProfile/wiki/Input-Data#orthoxml">Click here for</a> "How to use OMA orthoXML file"</em></p>
+						</div>
+					</section>
+					<section>
+						<div id='main_input'>
+							<p>Main input</p>
+							<p style="font-size:20px">presence/absence pattern + up to 2 additional variables</p>
+							<img src="images/input_long.png" style='float: top; border:0' height=200/>
+							<p style="font-size:30px"><a target="_blank" href="https://raw.githubusercontent.com/BIONF/phyloprofile/master/data/demo/test.main.long">long</a> format</p>
+							<p style="font-size:20px">tab delimited file containing 5 columns: geneID, ncbiID ("ncbi"+taxonID), orthoID, var1, var2</p>
+						</div>
+					</section>
+					<section>
+						<div id='main_input'>
+							<p>Main input</p>
+							<p style="font-size:20px">presence/absence pattern + up to 2 additional variables</p>
+							<img src="images/input_wide.png" style='float: top; border:0' height=120/>
+							<p style="font-size:30px"><a target="_blank" href="https://raw.githubusercontent.com/BIONF/phyloprofile/master/data/demo/test.main.wide">matrix (wide)</a> format</p>
+							<p style="font-size:20px">each cell contains orthoID#var1#var2</p>
+						</div>
+					</section>
+
+					<section>
+						<div id='anno_input'>
+							<p>Annotation input (optional)</p>
+							<p style="font-size:20px">contains <a target="_blank" href="https://github.com/BIONF/phyloprofile/tree/master/data/demo/domain_files">domain annotations</a> or structural information</p>
+							<img src="images/input_domain.png" style='float: top; border:0' height=200/>
+						</div>
+					</section>
+
+					<section>
+						<div id='variables_input'>
+							<p>Variables</p>
+							<img src="images/variables_input.png" style='float: top; border:0' height=150/>
+							<p>
+								<ul>
+									<li style="font-size:30px">2 additional information layers</li>
+									<li style="font-size:30px">Use max, min, mean or median values for aggregation </li>
+								</ul>
+							</p>
+						</div>
+					</section>
+
+					<section>
+						<div id='config_input'>
+							<p>Configurations</p>
+							<div style="width:400px; margin:0 auto;">
+								<div style="float:left; width:100 px"><img src="images/config_fasta.png" style='float: top; border:0' height=300/></div>
+								<div style="float:top; width:100 px"><img src="images/config_color.png" style='float: top; border:0' height=300/></div>
+							</div>
+							<p>
+								<ul>
+									<li style="font-size:30px">set path to sequence files</li>
+									<li style="font-size:30px">change colors for profile plots</li>
+								</ul>
+							</p>
+						</div>
+					</section>
+
+					<section>
+						<div id='taxon_input'>
+							<p>Seed taxon selection</p>
+							<div style="width:600px; margin:0 auto;">
+								<div style="float:left; width:100 px"><img src="images/seed_taxon_1.png" style='float: top; border:0' height=250/></div>
+								<div style="float:top; width:100 px"><img src="images/seed_taxon_2.png" style='float: top; border:0' height=250/></div>
+							</div>
+							<p style="font-size:30px">higher taxonomic level = more general analysis</p>
+						</div>
+					</section>
+				</section>
+
+				<!-- SLIDE 4 main profile -->
+				<section>
+					<h5 style="color: white; background-color: #6baed6"><strong>Main profile</strong></h5>
+					<section>
+						<img src="images/main.png" style='float: top; border:0' max-height="60%"/>
+					</section>
+
+					<section>
+						<div id='plot_setting'>
+							<p>Profile appearance</p>
+							<p><img src="images/plot_appearance_01.png" style='float: top; border:0' height=100/></p>
+							<p><img src="images/plot_appearance_02.png" style='float: top; border:0' height=300/></p>
+						</div>
+					</section>
+
+					<section>
+						<div id='thresholds'>
+							<p>Variable thresholds</p>
+							<img src="images/thresholds.png" style='float: top; border:0' height=150/>
+							<div style="width:800px; margin:0 auto;">
+								<div style="float:left; width:100 px"><img src="images/main_plot_before.png" style='float: top; border:0' height=200/></div>
+								<div style="float:left; width:30 px"><img src="images/arrow_right.png" style='float: top; border:0; box-shadow:none' height=100/></div>
+								<div style="float:top; width:100 px"><img src="images/main_plot_after.png" style='float: top; border:0' height=200/></div>
+							</div>
+							<p style="font-size:30px">dynamically filter profile</p>
+						</div>
+					</section>
+
+					<section>
+						<div id='point_info'>
+							<p>Point's info</p>
+							<img src="images/point_info.png" style='float: top; border:0' height=300/>
+							<p style="font-size:30px">info of a selected point on the profile</p>
+						</div>
+					</section>
+
+				</section>
+
+				<!-- SLIDE 5 detail information -->
+				<section>
+					<h5 style="color: white; background-color: #6baed6"><strong>Detail information</strong></h5>
+					<section>
+						<img src="images/detail_info_main.png" style='float: top; border:0' max-height="60%"/>
+					</section>
+
+					<section>
+						<div id='detailed_plot'>
+							<img src="images/detailed_plot.png" style='float: top; border:0' height=400/>
+							<p>
+								<ul>
+									<li style="font-size:30px">detailed scores for 2 additional variables</li>
+									<li style="font-size:30px">FASTA sequence of ortholog</li>
+								</ul>
+							</p>
+						</div>
+					</section>
+
+					<section>
+						<div id='domain_plot'>
+							<p>Domain architecture plot</p>
+							<img src="images/domain_plot.png" style='float: top; border:0' height=400/>
+							<p style="font-size:30px">for comparing protein architectures</p>
+						</div>
+					</section>
+
+				</section>
+
+				<!-- SLIDE 6 customized profile -->
+				<section>
+					<h5 style="color: white; background-color: #6baed6"><strong>Customized profile</strong></h5>
+					<section>
+						<img src="images/customized_profile.png" style='float: top; border:0' height="550"/>
+					</section>
+
+					<section>
+						<div id='customized_profile'>
+							<div style="width:800px; margin:0 auto;">
+								<div style="float:left; width:200 px"><img src="images/subset_taxa.png" style='float: top; border:0' height=300/></div>
+								<div style="float:left; width:30 px"><img src="images/arrow_right.png" style='float: top; border:0; box-shadow:none' height=100/></div>
+								<div style="float:top; width:100 px"><img src="images/subset_gene_taxa.png" style='float: top; border:0' height=300/></div>
+							</div>
+							<p>
+								<ul>
+									<li style="font-size:30px">subset of taxa and/or genes</li>
+									<li style="font-size:30px">add manually from list, from a file or choose from <a href="#/7">analysis functions</a></li>
+								</ul>
+							</p>
+						</div>
+					</section>
+
+				</section>
+
+				<!-- SLIDE 7 functions -->
+				<section>
+					<h5 style="color: white; background-color: #6baed6"><strong>Analysis functions</strong></h5>
+					<section>
+						<img src="images/function_menu.png" style='float: top; border:0' height="300"/>
+					</section>
+
+					<section>
+						<p style="font-size:30px">Profile clustering</p>
+						<div style="width:800px; margin:0 auto;">
+							<div style="float:left; width:100 px"><img src="images/main_before_clustering.png" style='float: top; border:0' height=100/></div>
+							<div style="float:left; width:200 px"><img src="images/function_profile_cluster.png" style='float: top; border:0' height="200"/></div>
+							<div style="float:top; width:100 px"><img src="images/main_after_clustering.png" style='float: top; border:0' height=100/></div>
+						</div>
+						<br><br>
+						<p style="font-size:20px">cluster similar profiles based on a distance matrix</p>
+						<p style="font-size:20px; font-style: italic">*list of selected genes can be submitted to customized profile</p>
+					</section>
+
+					<section>
+						<p style="font-size:30px">Distribution analysis</p>
+						<img src="images/function_distribution_analysis.png" style='float: top; border:0' height="400"/>
+					</section>
+
+					<section>
+						<p style="font-size:30px">Gene age estimation</p>
+						<img src="images/function_age_estimation.png" style='float: top; border:0' height="400"/>
+						<p style="font-size:20px; font-style: italic">*list of selected genes that have he same estimated age can be submitted to customized profile</p>
+					</section>
+
+					<section>
+						<p style="font-size:30px">Core gene identification</p>
+						<img src="images/function_consensus_finding.png" style='float: top; border:0' height="400"/>
+						<p style="font-size:20px">search for genes that have orthologs in all selected taxa</p>
+						<p style="font-size:20px; font-style: italic">*those genes can then be submitted to customized profile</p>
+					</section>
+
+					<section>
+						<p style="font-size:30px">Search NCBI taxonomy IDs</p>
+						<p style="font-size:20px">for a given list of <a target="_blank" href="https://raw.githubusercontent.com/BIONF/PhyloProfile/master/data/demo/test.taxaList">taxa names</a></p>
+						<img src="images/function_search_ncbi.png" style='float: top; border:0' height="400"/>
+					</section>
+
+				</section>
+
+				<!-- SLIDE 8 download-->
+				<section>
+					<h5 style="color: white; background-color: #6baed6"><strong>Download filtered data</strong></h5>
+					<section>
+						<img src="images/download_data.png" style='float: top; border:0' height="400"/>
+						<p style="font-size:30px">filtered data & sequences from main and customized profiles</p>
+						<p style="font-size:15px"><em>* If <a target="_blank" href="https://genomevolution.org/wiki/index.php/In-Paralog">in-paralogs</a> are present, option "Download representative sequences" will select only one sequence for each species for downloading</em></p>
+					</section>
+				</section>
+
+				<!-- SLIDE 9 more-->
+				<section>
+					<h5 style="color: white; background-color: #6baed6"><strong>More</strong></h5>
+					<!-- <section>
+						<p style="font-size:30px">Demo video</p>
+						<iframe src="images/phyloprofile_20170712.mp4" width="960" height="540" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+					</section> -->
+
+					<section>
+						<p style="font-size:30px">Help</p>
+						<ul>
+							<li style="font-size:20px">Extensive documentation, FAQs and known bugs <a href="https://github.com/BIONF/PhyloProfile/wiki" target="_blank">are described on our GitHub wiki pages</a>.</li>
+							<li style="font-size:20px"><a href="https://github.com/BIONF/PhyloProfile/wiki/Installation" target="_blank">Check the installation help</a> if you want to run <em>PhyloProfile</em> on your own machine.</li>
+							<li style="font-size:20px">We additionally offer some overview on <a href="https://github.com/BIONF/PhyloProfile/wiki/Input-Data" target="_blank">how to format your own data to visualize and analyze it</a> with <em>PhyloProfile</em>.</li>
+							<li style="font-size:20px">The Walkthrough <a href="https://github.com/BIONF/PhyloProfile/wiki/Walkthrough" target="_blank">explains our `demo` files and gives an idea of how to use <em>PhyloProfile</em></a>.</li>
+							<li style="font-size:20px">Things don't work as you expect? <a href="https://github.com/BIONF/PhyloProfile/wiki/FAQ-&-Bugs target="_blank"">Check our FAQ to get an idea what could have gone wrong</a>.</li>
+							<li style="font-size:20px">This couldn't solve your problem? <a href="https://github.com/BIONF/PhyloProfile/issues/new" target="_blank">Please open an issue on GitHub</a> or contact us via <a target="_blank" href="mailto:tran@bio.uni-frankfurt.de">email</a></li>
+						</ul>
+					</section>
+
+					<section>
+						<p style="font-size:30px">Links</p>
+						<p style="font-size:20px">online version: <a target="_blank" href="https://phyloprofile.shinyapps.io/phyloprofile/">phyloprofile.shinyapps.io/phyloprofile</a></p>
+						<p style="font-size:20px">standalone version: <a target="_blank" href="https://github.com/trvinh/phyloprofile">github.com/BIONF/phyloprofile</a></p>
+						<p style="font-size:20px">contact: <a target="_blank" href="mailto:tran@bio.uni-frankfurt.de">tran@bio.uni-frankfurt.de</a></p>
+						<img src="images/tnv_logo.png" style='float: top; border:0; box-shadow:none' height="100"/>
+					</section>
+				</section>
+
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				backgroundTransition: 'zoom', // Not working?!?!?
+
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+		      { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+		      { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+		      { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+		      { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+		</script>
+	</body>
+</html>
