@@ -143,15 +143,45 @@
 					<h5 style="color: white; background-color: #6baed6"><strong>Input</strong></h5>
 					<section>
 						<div id='input'>
-							<img src="images/input.png" style='float: top; border:0' height=300/>
+							<img src="images/input_1.png" style='float: top; border:0' height=300/>
 							<p>
 								<ul>
-									<li style="font-size:30px"><a href="#/3/1">Main</a> & <a href="#/3/4">additional annotation</a> input</li>
-									<li style="font-size:30px"><a href="#/3/5">Variables</a></li>
-									<li style="font-size:30px"><a href="#/3/6">Configurations</a></li>
-									<li style="font-size:30px"><a href="#/3/7">Seed taxon selection</a></li>
+									<li style="font-size:30px"><a href="#/3/1">Main</a> & <a href="#/3/6">additional annotation</a> input</li>
+									<li style="font-size:30px"><a href="#/3/7">How to prepare input files</a></li>
 								</ul>
 							</p>
+						</div>
+					</section>
+					<section>
+						<div id='main_input'>
+							<p>Main input</p>
+							<p style="font-size:20px">Required information</p>
+							<p>
+								<ol>
+									<li style="font-size:15px">for basic phylogenetic profile:
+									<ul>
+										<li style="font-size:15px">Gene ID of seed protein or ortholog group ID - <strong>geneID</strong></li>
+										<li style="font-size:15px">Taxonomy ID of species having orthologs (<em>ncbi+taxonID</em>, e.g. ncbi7029, ncbi3702)  - <strong>ncbiID (*)</strong></li>
+										<li style="font-size:15px">Ortholog ID - <strong>orthoID</strong></li>
+									</ul></li>
+									<li style="font-size:15px">for additional information layers (optionally):
+									<ul>
+										<li style="font-size:15px">Value for <em>first additional information layer </em> - <strong>var1</strong></li>
+										<li style="font-size:15px">Value for <em>second additional information layer </em> - <strong>var2</strong></li>
+									</ul></li>
+								</ol>
+							</p>
+							<p style="font-size:20px; color: red">(*) PhyloProfile requires taxonomy IDs in all of input files.</p>
+							<p style="font-size:20px"><em>PhyloProfile is provided with a <a href="#/8/5">function for searching taxon IDs from a list of taxon names</a>.</em></p>
+						</div>
+					</section>
+					<section>
+						<div id='main_input'>
+							<p>Main input</p>
+							<p style="font-size:20px">presence/absence pattern + up to 2 additional variables</p>
+							<img src="images/input_fasta.png" style='float: top; border:0' height=300/>
+							<p style="font-size:30px"><a target="_blank" href="https://raw.githubusercontent.com/BIONF/phyloprofile-data/data/demo/test.main.fasta">FASTA</a> format</p>
+							<p style="font-size:20px">Sequence header: <strong>>geneID|ncbiID|orthoID|var1|var2</strong></p>
 						</div>
 					</section>
 					<section>
@@ -170,7 +200,7 @@
 							<p style="font-size:20px">presence/absence pattern + up to 2 additional variables</p>
 							<img src="images/input_long.png" style='float: top; border:0' height=200/>
 							<p style="font-size:30px"><a target="_blank" href="https://raw.githubusercontent.com/BIONF/phyloprofile/master/data/demo/test.main.long">long</a> format</p>
-							<p style="font-size:20px">tab delimited file containing 5 columns: geneID, ncbiID ("ncbi"+taxonID), orthoID, var1, var2</p>
+							<p style="font-size:20px">tab delimited file containing 5 columns: <strong>geneID, ncbiID, orthoID, var1, var2</strong></p>
 						</div>
 					</section>
 					<section>
@@ -179,18 +209,88 @@
 							<p style="font-size:20px">presence/absence pattern + up to 2 additional variables</p>
 							<img src="images/input_wide.png" style='float: top; border:0' height=120/>
 							<p style="font-size:30px"><a target="_blank" href="https://raw.githubusercontent.com/BIONF/phyloprofile/master/data/demo/test.main.wide">matrix (wide)</a> format</p>
-							<p style="font-size:20px">each cell contains orthoID#var1#var2</p>
+							<p style="font-size:20px">header line contains <strong>ncbiID</strong></p>
+							<p style="font-size:20px">each cell contains <strong>orthoID#var1#var2</strong></p>
+							<p style="font-size:15px; color:red"><em>NOTE: this format is not suitable for profiles containing paralogs (co-orthologs)</em></p>
 						</div>
 					</section>
 
 					<section>
 						<div id='anno_input'>
 							<p>Annotation input (optional)</p>
-							<p style="font-size:20px">contains <a target="_blank" href="https://github.com/BIONF/phyloprofile/tree/master/data/demo/domain_files">domain annotations</a> or structural information</p>
+							<p style="font-size:20px"><a target="_blank" href="https://github.com/BIONF/phyloprofile/tree/master/data/demo/domain_files">domain annotations</a> or structural information</p>
 							<img src="images/input_domain.png" style='float: top; border:0' height=200/>
+							<p style="font-size:30px">Domain file is a tab-liminated file contains:</p>
+							<ol>
+								<li style="font-size:20px"><strong>pairID</strong>: geneID#orthoID</li>
+								<li style="font-size:20px"><strong>orthoID (required)</strong> and <strong>seedID</strong>: if both are present, domain plot will show domain architectures of both proteins for comparison. Otherwise only domains of orthologs will be plotted.</li>
+								<li style="font-size:20px"><strong>feature name</strong>: name of domains</li>
+								<li style="font-size:20px"><strong>start</strong> and <strong>end postion</strong> of each domain in the protein.</li>
+								<li style="font-size:20px"><strong>weight</strong> value for each feature (set as NA if unavailable)</li>
+							</ol>
 						</div>
 					</section>
 
+					<section>
+						<div id='prepare_input'>
+							<p>How to prepare input files</p>
+							<p>
+								<ul>
+									<li style="font-size:30px">Main input:
+									<ol>
+										<li style="font-size:20px">Use newest version of <a target="_blank" href="https://github.com/BIONF/HAMSTR">HaMStR</a> can directly generate compartible profile and domain files for PhyloProfile.</li>
+										<li style="font-size:20px">Obtain HOGs from <a target="_blank" href="https://omabrowser.org/oma/home/">OMA Browser:</a>
+										<pre><code>python ./scripts/get_oma_hogs.py -i data/demo/oma/omaIDs.list > data/demo/oma/omaHogs.orthoxml</code></pre>
+										</li>
+										<li style="font-size:20px">Convert OMA Standalone:
+											<pre><code>python ./scripts/convert_oma_standalone_orthoxml.py -x data/demo/oma/oma_example.orthoxml</code><code>-m data/demo/oma/taxon_mapping_oma_orthoxml.csv > data/demo/oma_example_phyloprofile_compatible.orthoxml</code></pre>
+										</li>
+										<li style="font-size:20px">Download orthoXML file from other supported public databases (if available).</li>
+										<li style="font-size:20px">Prepare input file manually by yourself in <a href="#/3/2">FASTA</a>, <a href="#/3/4">long</a> or <a href="#/3/5">matrix</a> format :)</li>
+									</ol></li>
+								</ul>
+							</p>
+						</div>
+					</section>
+
+					<section>
+						<div id='prepare_input'>
+							<p>How to prepare input files</p>
+							<p>
+								<ul>
+									<li style="font-size:30px">Domain file:
+									<ol>
+										<li style="font-size:20px"><a target="_blank" href="https://github.com/BIONF/HAMSTR">HaMStR</a> can directly generate compartible profile and domain files for PhyloProfile.</li>
+										<li style="font-size:20px">Use <a target="_blank" href="https://www.ebi.ac.uk/Tools/pfa/hmmer_hmmscan/help/">HMMScan</a> and <a target="_blank" href="https://www.ebi.ac.uk/Tools/pfa/pfamscan/help/">PfamScan</a> to do PFAM annotation:</a>
+											<pre><code>hmmscan -E 0.001 --noali --domtblout hmmscanOut.txt path_to_Pfam-a_files/Pfam-A.hmm data/demo/test.input.fasta</code></pre>
+											<pre><code>perl pfamscan.pl -fasta test.input.fasta -dir path_to_Pfam-A_files > pfamscanOut.txt</code></pre>
+											<p>then parse output files into compatible domain files:</p>
+											<pre><code>python ./scripts/hmmscanParser.py -i data/demo/pfamAnno/hmmscanOut.txt > hmmscanOut.domains</code></pre>
+											<pre><code>python ./scripts/pfamscanParser.py -i data/demo/pfamAnno/pfamscanOut.txt > pfamscanOut.domains</code></pre>
+										</li>
+										<li style="font-size:20px">Prepare input file manually by following <a href="#/3/6">this format</a>.</li>
+									</ol>
+								</ol></li>
+							</p>
+						</div>
+					</section>
+				</section>
+
+				<!-- SLIDE 4 input-continue -->
+				<section>
+					<h5 style="color: white; background-color: #6baed6"><strong>Input</strong></h5>
+					<section>
+						<div id='input'>
+							<img src="images/input_2.png" style='float: top; border:0' height=300/>
+							<p>
+								<ul>
+									<li style="font-size:30px"><a href="#/3/5">Variables</a></li>
+									<li style="font-size:30px"><a href="#/3/6">Configurations</a></li>
+									<li style="font-size:30px"><a href="#/3/7">Seed taxon selection</a></li>
+								</ul>
+							</p>
+						</div>
+					</section>
 					<section>
 						<div id='variables_input'>
 							<p>Variables</p>
@@ -207,16 +307,21 @@
 					<section>
 						<div id='config_input'>
 							<p>Configurations</p>
+
+							<p>
+								<ul>
+									<li style="font-size:20px">use all genes for analysis or upload list of genes of interest (<strong>Choose genes of interest</strong>)</li>
+									<li style="font-size:20px">alphabetical order sequences IDs or keep the order as in the input (<strong>Order sequence IDs</strong>)</li>
+									<li style="font-size:20px">order taxa based on NCBI taxonomy tree or by <em>user-defined tree(*)</em> (<strong>Order taxa</strong>)</li>
+									<li style="font-size:20px">set path to sequence files (<strong>FASTA config</strong>)</li>
+									<li style="font-size:20px">change default colors for profile plots (<strong>Set colors for profile</strong>)</li>
+								</ul>
+							</p>
 							<div style="width:400px; margin:0 auto;">
 								<div style="float:left; width:100 px"><img src="images/config_fasta.png" style='float: top; border:0' height=300/></div>
 								<div style="float:top; width:100 px"><img src="images/config_color.png" style='float: top; border:0' height=300/></div>
 							</div>
-							<p>
-								<ul>
-									<li style="font-size:30px">set path to sequence files</li>
-									<li style="font-size:30px">change colors for profile plots</li>
-								</ul>
-							</p>
+							<p style="font-size:10px">(*) input species tree has to be in newick format and should not contain <a target="_blank" href="http://blog.phytools.org/2013/06/robust-newick-tree-reader.html">singletons</a></p>
 						</div>
 					</section>
 
@@ -232,7 +337,7 @@
 					</section>
 				</section>
 
-				<!-- SLIDE 4 main profile -->
+				<!-- SLIDE 5 main profile -->
 				<section>
 					<h5 style="color: white; background-color: #6baed6"><strong>Main profile</strong></h5>
 					<section>
@@ -270,7 +375,7 @@
 
 				</section>
 
-				<!-- SLIDE 5 detail information -->
+				<!-- SLIDE 6 detail information -->
 				<section>
 					<h5 style="color: white; background-color: #6baed6"><strong>Detail information</strong></h5>
 					<section>
@@ -299,7 +404,7 @@
 
 				</section>
 
-				<!-- SLIDE 6 customized profile -->
+				<!-- SLIDE 7 customized profile -->
 				<section>
 					<h5 style="color: white; background-color: #6baed6"><strong>Customized profile</strong></h5>
 					<section>
@@ -309,22 +414,30 @@
 					<section>
 						<div id='customized_profile'>
 							<div style="width:800px; margin:0 auto;">
-								<div style="float:left; width:200 px"><img src="images/subset_taxa.png" style='float: top; border:0' height=300/></div>
-								<div style="float:left; width:30 px"><img src="images/arrow_right.png" style='float: top; border:0; box-shadow:none' height=100/></div>
-								<div style="float:top; width:100 px"><img src="images/subset_gene_taxa.png" style='float: top; border:0' height=300/></div>
+								<p style="font-size:30px">Profile for a subset of genes and/or taxa, which are</p>
 							</div>
-							<p>
+							<div>
 								<ul>
-									<li style="font-size:30px">subset of taxa and/or genes</li>
-									<li style="font-size:30px">add manually from list, from a file or choose from <a href="#/7">analysis functions</a></li>
+									<li style="font-size:20px">manually selected from the lists</li>
+									<div style="float:top; width:100 px"><img src="images/subset_gene_taxa.png" style='float: top; border:0' height=150/></div>
 								</ul>
-							</p>
+							</div>
+							<div>
+								<ul>
+									<li style="font-size:20px">inputed using "Browse..." option</a></li>
+									<div style="float:left; width:200 px"><img src="images/subset_taxa.png" style='float: top; border:0' height=150/></div>
+								</ul>
+							</div>
+							<div>
+								<ul>
+									<li style="font-size:20px">chosen from <a href="#/8">analysis functions</a></li>
+							</div>
 						</div>
 					</section>
 
 				</section>
 
-				<!-- SLIDE 7 functions -->
+				<!-- SLIDE 8 functions -->
 				<section>
 					<h5 style="color: white; background-color: #6baed6"><strong>Analysis functions</strong></h5>
 					<section>
@@ -339,26 +452,28 @@
 							<div style="float:top; width:100 px"><img src="images/main_after_clustering.png" style='float: top; border:0' height=100/></div>
 						</div>
 						<br><br>
-						<p style="font-size:20px">cluster similar profiles based on a distance matrix</p>
-						<p style="font-size:20px; font-style: italic">*list of selected genes can be submitted to customized profile</p>
+						<p style="font-size:20px">cluster similar profiles based on a calculated distance matrix</p>
+						<p style="font-size:20px; font-style: italic">*drag to select a set of genes to submit to customized profile</p>
 					</section>
 
 					<section>
 						<p style="font-size:30px">Distribution analysis</p>
 						<img src="images/function_distribution_analysis.png" style='float: top; border:0' height="400"/>
+						<p style="font-size:20px">distribution of additional information and precentage of taxa summarized in supertaxon</p>
 					</section>
 
 					<section>
 						<p style="font-size:30px">Gene age estimation</p>
 						<img src="images/function_age_estimation.png" style='float: top; border:0' height="400"/>
-						<p style="font-size:20px; font-style: italic">*list of selected genes that have he same estimated age can be submitted to customized profile</p>
+						<p style="font-size:20px">evolutionary age estimated using LCA algorithm</p>
+						<p style="font-size:20px; font-style: italic">*list of selected genes that have the same estimated age can be submitted to customized profile</p>
 					</section>
 
 					<section>
 						<p style="font-size:30px">Core gene identification</p>
 						<img src="images/function_consensus_finding.png" style='float: top; border:0' height="400"/>
 						<p style="font-size:20px">search for genes that have orthologs in all selected taxa</p>
-						<p style="font-size:20px; font-style: italic">*those genes can then be submitted to customized profile</p>
+						<p style="font-size:20px; font-style: italic">*those genes can then be added to customized profile</p>
 					</section>
 
 					<section>
@@ -369,7 +484,7 @@
 
 				</section>
 
-				<!-- SLIDE 8 download-->
+				<!-- SLIDE 9 download-->
 				<section>
 					<h5 style="color: white; background-color: #6baed6"><strong>Download filtered data</strong></h5>
 					<section>
